@@ -1,27 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/animation.dart';
+import 'dart:async';
 
 void main() {
-  runApp(MaterialApp(
-    home:Home(),
+  runApp(
+      MaterialApp(
+        home:Splash(),
   ));
 }
 
-class Home extends StatefulWidget {
+class Splash extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _SplashState createState() => _SplashState();
 }
 
-class _HomeState extends State<Home> {
-
+class _SplashState extends State<Splash> {
+  @override
+  void initState(){
+    Timer(Duration(seconds: 5),
+            ()=>Navigator.pushReplacement(
+                context,MaterialPageRoute(
+                builder:(context) => Home()
+        )
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        body: Center(
-          child: Image.asset('assets/home.gif'),
-        ),
-
+      body: Center(
+        child: Image.asset('assets/home.gif'),
+      ),
     );
+  }
+}
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Game'),
+    ),
+    body: Text('Hello'),
+  );
   }
 }
