@@ -18,7 +18,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        body: Image.asset('../assets/home.gif'),
+        body: Center(
+          child: Image.asset('assets/home.gif'),
+        ),
 
     );
   }
