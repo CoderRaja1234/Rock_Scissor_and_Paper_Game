@@ -17,9 +17,12 @@ class CustomCard extends StatelessWidget {
   CustomCard({this.item});
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      child: Image.asset(item,height: height*0.30, width: width/4),
+    return InkWell(
+      onTap: () {},
+      child: Card(
+        elevation: 0,
+        child: Image.asset(item,height: height*0.30, width: width/4),
+      ),
     );
   }
 }
@@ -35,9 +38,13 @@ class _HomeState extends State<Home> {
       backgroundColor: Color.fromRGBO(255, 255, 255, 1),
       body: Column(
         children: [
-          SizedBox(height: height*0.3,),
+          SizedBox(height: height*0.05,),
+          Text('RockPaperScissors', style: TextStyle(fontFamily: 'KaushanScript', fontSize: 38),),
+          SizedBox(height: height*0.2,),
+          Text('SELECT', style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),),
+
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomCard(item: 'assets/rock.gif'),
               CustomCard(item: 'assets/paper.gif'),
