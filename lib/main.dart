@@ -6,6 +6,7 @@ double width, height;
 String userSelection = 'rock', botSelection = 'rock';
 //visibility of gifs
 bool rock = true, paper = true, scissors = true;
+String res="Draw";
 
 void main() {
   runApp(MaterialApp(
@@ -53,21 +54,42 @@ void calc(String userSelection) {
   if (userSelection == 'scissors') userItem = 2;
 
   if (bot == userItem)
+  {
+    res="Draw";
     print("Draw");
+  }
   else {
     if (userItem == 0) {
-      if (bot == 1) print("You lose!! $botSelection covers $userSelection");
-      if (bot == 2) print("You win!! $userSelection smashes $botSelection");
+      if (bot == 1) {
+        res="Lose";
+        print("You lose!! $botSelection covers $userSelection");
+      }
+      if (bot == 2) {
+        res="Win";
+        print("You win!! $userSelection smashes $botSelection");
+      }
     }
 
     if (userItem == 1) {
-      if (bot == 0) print("You win!! $userSelection covers $botSelection");
-      if (bot == 2) print("You lose!! $botSelection cut $userSelection");
+      if (bot == 0){
+        res="Win";
+        print("You win!! $userSelection covers $botSelection");
+      }
+      if (bot == 2){
+        res="Lose";
+        print("You lose!! $botSelection cut $userSelection");
+      }
     }
 
     if (userItem == 2) {
-      if (bot == 0) print("You lose!! $botSelection smashes $userSelection");
-      if (bot == 1) print("You win!! $userSelection cut $botSelection");
+      if (bot == 0){
+        res="Lose";
+        print("You lose!! $botSelection smashes $userSelection");
+      }
+      if (bot == 1){
+        res="Win";
+        print("You win!! $userSelection cut $botSelection");
+      }
     }
   }
 }
@@ -112,70 +134,74 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           SizedBox(
             height: height * 0.2,
           ),
-          Text(
-            'SELECT',
-            style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
-          ),
-          SizedBox(
-            height: height * 0.05,
-          ),
           Stack(children: [
             AnimatedOpacity(
               opacity: firstLayerVisible ? 1.0 : 0.0,
-              duration: Duration(milliseconds: 200),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              duration: Duration(milliseconds: 500),
+              child: Column(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        userSelection = 'rock';
-                        calc(userSelection);
-                        firstLayerVisible = false;
-                        secondLayerVisible = true;
-                        _animationController.forward();
-                      });
-                    },
-                    child: Card(
-                      elevation: 0,
-                      color: Color.fromRGBO(250, 186, 87, 1),
-                      child: Image.asset('assets/rock.gif',
-                          height: height * 0.30, width: width / 4),
-                    ),
+                  Text(
+                    'SELECT',
+                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
                   ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        userSelection = 'paper';
-                        calc(userSelection);
-                        firstLayerVisible = false;
-                        secondLayerVisible = true;
-                        _animationController.forward();
-                      });
-                    },
-                    child: Card(
-                      elevation: 0,
-                      color: Color.fromRGBO(250, 186, 87, 1),
-                      child: Image.asset('assets/paper.gif',
-                          height: height * 0.30, width: width / 4),
-                    ),
+                  SizedBox(
+                    height: height * 0.05,
                   ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        userSelection = 'scissors';
-                        calc(userSelection);
-                        firstLayerVisible = false;
-                        secondLayerVisible = true;
-                        _animationController.forward();
-                      });
-                    },
-                    child: Card(
-                      elevation: 0,
-                      color: Color.fromRGBO(250, 186, 87, 1),
-                      child: Image.asset('assets/scissors.gif',
-                          height: height * 0.30, width: width / 4),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            userSelection = 'rock';
+                            calc(userSelection);
+                            firstLayerVisible = false;
+                            secondLayerVisible = true;
+                            _animationController.forward();
+                          });
+                        },
+                        child: Card(
+                          elevation: 0,
+                          color: Color.fromRGBO(250, 186, 87, 1),
+                          child: Image.asset('assets/rock.gif',
+                              height: height * 0.30, width: width / 4),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            userSelection = 'paper';
+                            calc(userSelection);
+                            firstLayerVisible = false;
+                            secondLayerVisible = true;
+                            _animationController.forward();
+                          });
+                        },
+                        child: Card(
+                          elevation: 0,
+                          color: Color.fromRGBO(250, 186, 87, 1),
+                          child: Image.asset('assets/paper.gif',
+                              height: height * 0.30, width: width / 4),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            userSelection = 'scissors';
+                            calc(userSelection);
+                            firstLayerVisible = false;
+                            secondLayerVisible = true;
+                            _animationController.forward();
+                          });
+                        },
+                        child: Card(
+                          elevation: 0,
+                          color: Color.fromRGBO(250, 186, 87, 1),
+                          child: Image.asset('assets/scissors.gif',
+                              height: height * 0.30, width: width / 4),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -183,28 +209,39 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             AnimatedOpacity(
               opacity: secondLayerVisible ? 1.0 : 0.0,
               duration: Duration(milliseconds: 500),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
                 children: [
-                  SlideTransition(
-                    position:
-                    Tween<Offset>(begin: Offset(-10, 0), end: Offset.zero)
-                        .animate(_animationController),
-                    child: Card(
-                      elevation: 0,
-                      child: Image.asset('assets/$userSelection.gif',
-                          height: height * 0.30, width: width / 4),
-                    ),
+                  Text(
+                    res,
+                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
                   ),
-                  SlideTransition(
-                    position:
-                    Tween<Offset>(begin: Offset(10, 0), end: Offset.zero)
-                        .animate(_animationController),
-                    child: Card(
-                      elevation: 0,
-                      child: Image.asset('assets/$botSelection.gif',
-                          height: height * 0.30, width: width / 4),
-                    ),
+                  SizedBox(
+                    height: height * 0.05,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SlideTransition(
+                        position:
+                        Tween<Offset>(begin: Offset(-10, 0), end: Offset.zero)
+                            .animate(_animationController),
+                        child: Card(
+                          elevation: 0,
+                          child: Image.asset('assets/$userSelection.gif',
+                              height: height * 0.30, width: width / 4),
+                        ),
+                      ),
+                      SlideTransition(
+                        position:
+                        Tween<Offset>(begin: Offset(10, 0), end: Offset.zero)
+                            .animate(_animationController),
+                        child: Card(
+                          elevation: 0,
+                          child: Image.asset('assets/$botSelection.gif',
+                              height: height * 0.30, width: width / 4),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
