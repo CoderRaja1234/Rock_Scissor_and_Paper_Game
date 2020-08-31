@@ -231,6 +231,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             .animate(_animationController),
                         child: Card(
                           elevation: 0,
+                          color: Color.fromRGBO(250, 186, 87, 1),
                           child: Image.asset('assets/$userSelection.gif',
                               height: height * 0.30, width: width / 4),
                         ),
@@ -241,6 +242,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             .animate(_animationController),
                         child: Card(
                           elevation: 0,
+                          color: Color.fromRGBO(250, 186, 87, 1),
                           child: Image.asset('assets/$botSelection.gif',
                               height: height * 0.30, width: width / 4),
                         ),
