@@ -23,7 +23,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     Timer(
         Duration(milliseconds: 1000),
-        () => Navigator.pushReplacement(
+            () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Home())));
   }
 
@@ -188,8 +188,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 children: [
                   SlideTransition(
                     position:
-                        Tween<Offset>(begin: Offset(-10, 0), end: Offset.zero)
-                            .animate(_animationController),
+                    Tween<Offset>(begin: Offset(-10, 0), end: Offset.zero)
+                        .animate(_animationController),
                     child: Card(
                       elevation: 0,
                       child: Image.asset('assets/$userSelection.gif',
@@ -198,8 +198,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ),
                   SlideTransition(
                     position:
-                        Tween<Offset>(begin: Offset(10, 0), end: Offset.zero)
-                            .animate(_animationController),
+                    Tween<Offset>(begin: Offset(10, 0), end: Offset.zero)
+                        .animate(_animationController),
                     child: Card(
                       elevation: 0,
                       child: Image.asset('assets/$botSelection.gif',
