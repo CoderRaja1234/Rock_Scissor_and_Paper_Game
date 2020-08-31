@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       //rgb(250, 186, 87)
-      backgroundColor: Color.fromRGBO(250, 186, 87, 1),
+      backgroundColor: Colors.orange[300],
       body: Center(
         child: Image.asset('assets/home.gif'),
       ),
