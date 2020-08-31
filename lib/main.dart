@@ -6,7 +6,7 @@ double width, height;
 String userSelection = 'rock', botSelection = 'rock';
 //visibility of gifs
 bool rock = true, paper = true, scissors = true;
-String res="Draw";
+String res="Draw", comment="";
 
 void main() {
   runApp(MaterialApp(
@@ -56,39 +56,39 @@ void calc(String userSelection) {
   if (bot == userItem)
   {
     res="Draw";
-    print("Draw");
+    comment="Try again.";
   }
   else {
     if (userItem == 0) {
       if (bot == 1) {
-        res="Lose";
-        print("You lose!! $botSelection covers $userSelection");
+        res="You Lose!!";
+        comment="$botSelection covers $userSelection";
       }
       if (bot == 2) {
-        res="Win";
-        print("You win!! $userSelection smashes $botSelection");
+        res="You Win!!";
+        comment="$userSelection smashes $botSelection";
       }
     }
 
     if (userItem == 1) {
       if (bot == 0){
-        res="Win";
-        print("You win!! $userSelection covers $botSelection");
+        res="You Win!!";
+        comment="$userSelection covers $botSelection";
       }
       if (bot == 2){
-        res="Lose";
-        print("You lose!! $botSelection cut $userSelection");
+        res="You Lose!!";
+        comment="$botSelection cut $userSelection";
       }
     }
 
     if (userItem == 2) {
       if (bot == 0){
-        res="Lose";
-        print("You lose!! $botSelection smashes $userSelection");
+        res="You Lose!!";
+        comment="$botSelection smashes $userSelection";
       }
       if (bot == 1){
-        res="Win";
-        print("You win!! $userSelection cut $botSelection");
+        res="You Win!!";
+        comment="$userSelection cut $botSelection";
       }
     }
   }
@@ -215,6 +215,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     res,
                     style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
                   ),
+                  Text(
+                    comment,
+                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
+                  ),
                   SizedBox(
                     height: height * 0.05,
                   ),
@@ -243,30 +247,47 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ],
                   ),
+                  SizedBox(height: height*0.1,),
+                  ClipOval(
+                    child: Material(
+                      color: Colors.blue, // button color
+                      child: InkWell(
+                        splashColor: Colors.red, // inkwell color
+                        child: SizedBox(
+                            width: 56, height: 56, child: Icon(Icons.refresh)),
+                        onTap: () {
+                          setState(() {
+                            _animationController.reverse();
+                            firstLayerVisible = true;
+                            secondLayerVisible = false;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ]),
-          SizedBox(height: height*0.1,),
-          Center(
-            child: ClipOval(
-              child: Material(
-                color: Colors.blue, // button color
-                child: InkWell(
-                  splashColor: Colors.red, // inkwell color
-                  child: SizedBox(
-                      width: 56, height: 56, child: Icon(Icons.refresh)),
-                  onTap: () {
-                    setState(() {
-                      _animationController.reverse();
-                      firstLayerVisible = true;
-                      secondLayerVisible = false;
-                    });
-                  },
-                ),
-              ),
-            ),
-          )
+          // Center(
+          //   child: ClipOval(
+          //     child: Material(
+          //       color: Colors.blue, // button color
+          //       child: InkWell(
+          //         splashColor: Colors.red, // inkwell color
+          //         child: SizedBox(
+          //             width: 56, height: 56, child: Icon(Icons.refresh)),
+          //         onTap: () {
+          //           setState(() {
+          //             _animationController.reverse();
+          //             firstLayerVisible = true;
+          //             secondLayerVisible = false;
+          //           });
+          //         },
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
