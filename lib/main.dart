@@ -122,7 +122,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Stack(children: [
             AnimatedOpacity(
               opacity: firstLayerVisible ? 1.0 : 0.0,
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 200),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
