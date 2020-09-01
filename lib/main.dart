@@ -23,7 +23,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     Timer(
-        Duration(milliseconds: 1000),
+        Duration(seconds: 4),
             () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Home())));
   }
@@ -131,15 +131,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             'RockPaperScissors',
             style: TextStyle(fontFamily: 'KaushanScript', fontSize: 38),
           ),
-          SizedBox(
-            height: height * 0.2,
-          ),
+          // SizedBox(
+          //   height: height * 0.2,
+          // ),
           Stack(children: [
             AnimatedOpacity(
               opacity: firstLayerVisible ? 1.0 : 0.0,
               duration: Duration(milliseconds: 500),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: height * 0.2,
+                  ),
                   Text(
                     'SELECT',
                     style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
@@ -211,6 +214,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               duration: Duration(milliseconds: 500),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: height * 0.14,
+                  ),
                   Text(
                     res,
                     style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
