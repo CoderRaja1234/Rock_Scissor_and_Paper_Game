@@ -1,12 +1,14 @@
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 double width, height;
+int score = 0;
 String userSelection = 'rock', botSelection = 'rock';
 //visibility of gifs
 bool rock = true, paper = true, scissors = true;
-String res="Draw", comment="";
+String res = "Draw", comment = "";
 
 void main() {
   runApp(MaterialApp(
@@ -23,8 +25,8 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 4),
-            () => Navigator.pushReplacement(
+        Duration(milliseconds: 800),
+        () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Home())));
   }
 
@@ -53,42 +55,43 @@ void calc(String userSelection) {
   if (userSelection == 'paper') userItem = 1;
   if (userSelection == 'scissors') userItem = 2;
 
-  if (bot == userItem)
-  {
-    res="Draw";
-    comment="Try again.";
-  }
-  else {
+  if (bot == userItem) {
+    res = "Draw";
+    comment = "Try again.";
+  } else {
     if (userItem == 0) {
       if (bot == 1) {
-        res="You Lose!!";
-        comment="$botSelection covers $userSelection";
+        res = "You Lose!!";
+        comment = "$botSelection covers $userSelection";
       }
       if (bot == 2) {
-        res="You Win!!";
-        comment="$userSelection smashes $botSelection";
+        res = "You Win!!";
+        score += 1;
+        comment = "$userSelection smashes $botSelection";
       }
     }
 
     if (userItem == 1) {
-      if (bot == 0){
-        res="You Win!!";
-        comment="$userSelection covers $botSelection";
+      if (bot == 0) {
+        res = "You Win!!";
+        score += 1;
+        comment = "$userSelection covers $botSelection";
       }
-      if (bot == 2){
-        res="You Lose!!";
-        comment="$botSelection cut $userSelection";
+      if (bot == 2) {
+        res = "You Lose!!";
+        comment = "$botSelection cut $userSelection";
       }
     }
 
     if (userItem == 2) {
-      if (bot == 0){
-        res="You Lose!!";
-        comment="$botSelection smashes $userSelection";
+      if (bot == 0) {
+        res = "You Lose!!";
+        comment = "$botSelection smashes $userSelection";
       }
-      if (bot == 1){
-        res="You Win!!";
-        comment="$userSelection cut $botSelection";
+      if (bot == 1) {
+        res = "You Win!!";
+        score += 1;
+        comment = "$userSelection cut $botSelection";
       }
     }
   }
@@ -110,7 +113,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
 
     super.initState();
   }
@@ -131,9 +134,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             'RockPaperScissors',
             style: TextStyle(fontFamily: 'KaushanScript', fontSize: 38),
           ),
-          // SizedBox(
-          //   height: height * 0.2,
-          // ),
+          SizedBox(
+            height: height * 0.01,
+          ),
+          Center(
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Score: ',
+                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 24),
+                  ),
+                  Text(
+                    '$score ',
+                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 40,),
+                  ),
+                ]),
+          ),
           Stack(children: [
             AnimatedOpacity(
               opacity: firstLayerVisible ? 1.0 : 0.0,
@@ -219,11 +237,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ),
                   Text(
                     res,
-                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
+                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 30),
                   ),
                   Text(
                     comment,
-                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 28),
+                    style: TextStyle(fontFamily: 'KaushanScript', fontSize: 26),
                   ),
                   SizedBox(
                     height: height * 0.05,
@@ -232,8 +250,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SlideTransition(
-                        position:
-                        Tween<Offset>(begin: Offset(-10, 0), end: Offset.zero)
+                        position: Tween<Offset>(
+                                begin: Offset(-10, 0), end: Offset.zero)
                             .animate(_animationController),
                         child: Card(
                           elevation: 0,
@@ -243,8 +261,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       SlideTransition(
-                        position:
-                        Tween<Offset>(begin: Offset(10, 0), end: Offset.zero)
+                        position: Tween<Offset>(
+                                begin: Offset(10, 0), end: Offset.zero)
                             .animate(_animationController),
                         child: Card(
                           elevation: 0,
@@ -255,12 +273,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  SizedBox(height: height*0.1,),
+                  SizedBox(
+                    height: height * 0.1,
+                  ),
                   ClipOval(
                     child: Material(
                       color: Colors.blue, // button color
                       child: InkWell(
-                        splashColor: Colors.red, // inkwell color
+                        splashColor: Color.fromRGBO(250, 186, 87, 1),
+                        // inkwell color
                         child: SizedBox(
                             width: 56, height: 56, child: Icon(Icons.refresh)),
                         onTap: () {
@@ -277,25 +298,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
             ),
           ]),
-          // Center(
-          //   child: ClipOval(
-          //     child: Material(
-          //       color: Colors.blue, // button color
-          //       child: InkWell(
-          //         splashColor: Colors.red, // inkwell color
-          //         child: SizedBox(
-          //             width: 56, height: 56, child: Icon(Icons.refresh)),
-          //         onTap: () {
-          //           setState(() {
-          //             _animationController.reverse();
-          //             firstLayerVisible = true;
-          //             secondLayerVisible = false;
-          //           });
-          //         },
-          //       ),
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );
