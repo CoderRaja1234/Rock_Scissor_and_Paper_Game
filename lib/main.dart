@@ -62,11 +62,12 @@ void calc(String userSelection) {
     if (userItem == 0) {
       if (bot == 1) {
         res = "You Lose!!";
+        score -= 1;
         comment = "$botSelection covers $userSelection";
       }
       if (bot == 2) {
         res = "You Win!!";
-        score += 1;
+        score += 2;
         comment = "$userSelection smashes $botSelection";
       }
     }
@@ -74,11 +75,12 @@ void calc(String userSelection) {
     if (userItem == 1) {
       if (bot == 0) {
         res = "You Win!!";
-        score += 1;
+        score += 2;
         comment = "$userSelection covers $botSelection";
       }
       if (bot == 2) {
         res = "You Lose!!";
+        score -= 1;
         comment = "$botSelection cut $userSelection";
       }
     }
@@ -86,11 +88,12 @@ void calc(String userSelection) {
     if (userItem == 2) {
       if (bot == 0) {
         res = "You Lose!!";
+        score -= 1;
         comment = "$botSelection smashes $userSelection";
       }
       if (bot == 1) {
         res = "You Win!!";
-        score += 1;
+        score += 2;
         comment = "$userSelection cut $botSelection";
       }
     }
@@ -274,7 +277,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ],
                   ),
                   SizedBox(
-                    height: height * 0.1,
+                    height: height * 0.05,
                   ),
                   ClipOval(
                     child: Material(
